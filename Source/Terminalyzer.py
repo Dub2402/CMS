@@ -1,12 +1,10 @@
-from Pick_objects import Pick_Objects
-from Parser import Parser
+from .PickObjects import Pick_Objects
 from urllib.parse import urlparse
 
 
 class Terminalyzer:
     def __init__(self) -> None:
         self.__pick_objects = Pick_Objects()
-        self.__parser = Parser()
         self.__level = "1"
         self.__site = ""
         self.__social_network = ""
@@ -41,10 +39,9 @@ class Terminalyzer:
             else:
                 if self.__level == "1":
                     self.__site = answer
-                    self.__parser.Get_Social_Networks()
 
                 if self.__level =="2":
                     self.__social_network = answer
 
                 self.__level = str(int(self.__level)+ 1)
-                answer = self.__pick_objects.Call(self.__level)
+                answer = self.__pick_objects.Call(self.__level, self.__site)

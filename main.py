@@ -1,3 +1,3 @@
-from Terminalyzer import Terminalyzer
+from Source.Terminalyzer import Terminalyzer
 
 Terminalyzer().Start()

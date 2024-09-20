@@ -1,6 +1,21 @@
 from pick import pick
+from dublib.Methods.JSON import ReadJSON
 
 class Pick_Objects:
+
+    def __GetNamesSites(self, site):
+        self.Data = ReadJSON(f"Data/{site}.json")
+       
+        NameSites = set()
+        answers = list()
+        for Index in range(len(self.Data["files"])):
+            for key in self.Data["files"][Index]:         
+                if key == "path": NameSites.add(key.replace("path", "Назад"))
+                else: NameSites.add(key)
+                
+        answers = sorted(NameSites)
+        return answers
+
     def __init__(self):
         self.__objects = {
             "1": {
@@ -40,9 +55,19 @@ class Pick_Objects:
             }
         }
         
-    def Call(self, level: str):
+        
+    def Call(self, level: str, site: str = ""):
         title = self.__objects[level]["title"]
-        answers = self.__objects[level]["values"]
+        if level == "2": answers = self.__GetNamesSites(site)
+        else: answers = self.__objects[level]["values"]
         answer = pick(answers, title)[0]
         
         return answer
+
+
+
+
+
+
+    
+    
