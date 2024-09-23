@@ -7,17 +7,18 @@ class Parser:
     def __init__(self) -> None:
         pass
         
-    def GetLink(self, site, social_network):
-        self.Data = ReadJSON(f"Data/{site}.json")
+    def GetLink(self, config: dict, social_network: str):
+        titlereplace = ""
 
-        for Index in range(len(self.Data["files"])):
-            for key in self.Data["files"][Index]:    
-                if key == social_network: 
-                    with open(self.Data["files"][Index]["path"]) as file:
-                        soup = BeautifulSoup(file, "html.parser")
-                        if self.Data["files"][Index][key][0]["property"] == "class":
-                            titlereplace = soup.find(class_ = self.Data["files"][Index][key][0]["value"]).attrs['href']
+        for key in config["sites"]:
+            if key == social_network: 
+                path = f"{config["mount"]}" + f"{config["sites"][key]["files"][0]}"
+                with open(path) as file:
+                    soup = BeautifulSoup(file, "html.parser")
+                    if config["sites"][social_network]["property"] == "class":
                 
+                            titlereplace = soup.find(class_ = config["sites"][social_network]["value"]).attrs['href']
+
         return titlereplace
     
     def ReplaceLink():
