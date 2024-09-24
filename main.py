@@ -1,3 +1,11 @@
 from Source.Terminalyzer import Terminalyzer
+from dublib.CLI.Templates import Clear
 
-Terminalyzer().Start()
+Clear()
+
+try:
+    Terminalyzer().Start()
+
+except KeyboardInterrupt:
+    Clear()
+    exit(0)
