@@ -8,7 +8,7 @@ class Manager:
 
     def __GetConfigs(self) -> list:
         self.__Configs = list()
-        for file in os.listdir("Config"):
+        for file in sorted(os.listdir("Config")):
             self.__Configs.append(ReadJSON(f"Config/{file}"))
 
         return self.__Configs
@@ -41,7 +41,6 @@ class Manager:
 
     def __GetNamesSites(self) -> list:
         answers = list()
-
 
         for Index in range(len(self.__Configs)):
             answers.append(self.__Configs[Index]["name"])
